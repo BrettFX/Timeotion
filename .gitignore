@@ -2,4 +2,5 @@
 /Timeotion/nbproject/*.xml
 /Timeotion/nbproject/*.properties
 /Timeotion/build/
-/Timeotion/dist/
+Timeotion/dist/
+.DS_Store
