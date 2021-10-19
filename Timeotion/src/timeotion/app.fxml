@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -11,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="465.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timeotion.appController">
+<AnchorPane id="AnchorPane" prefHeight="465.0" prefWidth="380.0" style="-fx-background-color: #00000000;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timeotion.appController">
    <children>
       <AnchorPane fx:id="topbar" prefHeight="60.0" prefWidth="380.0" style="-fx-background-color: #3D4956;">
          <children>
@@ -46,7 +43,6 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <JFXToggleButton layoutX="243.0" layoutY="14.0" prefWidth="91.0" text="On" textFill="#eda678" toggleColor="#eda678" toggleLineColor="#eba478e5" />
             <Label layoutX="35.0" layoutY="66.0" text="Called 3D Touch, the new&#10;technology can sense pressure." textFill="WHITE">
                <font>
                   <Font size="10.0" />
@@ -57,22 +53,19 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <JFXToggleButton layoutX="243.0" layoutY="99.0" prefWidth="91.0" text="On" textFill="#eda678" toggleColor="#eda678" toggleLineColor="#eba478e5" />
             <Label layoutX="35.0" layoutY="151.0" text="Auto-subscribe to the channel." textFill="WHITE">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
             <Separator layoutX="32.0" layoutY="192.0" opacity="0.3" prefHeight="0.0" prefWidth="315.0" />
-            <JFXSlider layoutX="31.0" layoutY="245.0" prefHeight="16.0" prefWidth="315.0" />
             <Label layoutX="33.0" layoutY="215.0" text="SCREEN BRIGHTNESS" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <JFXCheckBox checkedColor="#eda678" layoutX="32.0" layoutY="283.0" text="Auto Brightness" textFill="WHITE" />
-            <JFXButton layoutX="54.0" layoutY="336.0" prefHeight="27.0" prefWidth="113.0" style="-fx-background-color: #515d6c; -fx-border-radius: 5em; -fx-background-radius: 5em;" text="Cancel" textFill="WHITE" />
-            <JFXButton layoutX="221.0" layoutY="336.0" prefHeight="27.0" prefWidth="113.0" style="-fx-background-color: #eda678#eda678; -fx-border-radius: 5em; -fx-background-radius: 5em;" text="Save" />
+            <JFXToggleButton layoutX="258.0" layoutY="15.0" text="On" textFill="#eda678" toggleColor="#eda678" toggleLineColor="#eba478e5" />
+            <JFXToggleButton layoutX="258.0" layoutY="100.0" text="On" textFill="#eda678" toggleColor="#eda678" toggleLineColor="#eba478e5" />
          </children>
       </AnchorPane>
    </children>
