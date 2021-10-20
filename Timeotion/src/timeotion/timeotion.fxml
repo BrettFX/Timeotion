@@ -38,7 +38,6 @@
          </children></AnchorPane>
       <AnchorPane fx:id="user" layoutY="70.0" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" />
       <AnchorPane fx:id="stats" layoutY="70.0" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" />
-      <AnchorPane fx:id="awards" layoutY="70.0" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" />
       <AnchorPane fx:id="settings" layoutY="70.0" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;">
          <children>
             <Label layoutX="35.0" layoutY="38.0" text="TOUCH ENABLED" textFill="WHITE">
@@ -75,5 +74,23 @@
             <JFXButton layoutX="215.0" layoutY="345.0" prefHeight="27.0" prefWidth="132.0" style="-fx-background-color: #eda678; -fx-border-radius: 5em; -fx-background-radius: 5em;" text="Save" />
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="awards" layoutY="70.0" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;">
+         <children>
+            <ImageView layoutX="158.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/user.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="173.0" layoutY="153.0" text="Brett A" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="152.0" layoutY="176.0" text="Software Engineer" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
    </children>
 </AnchorPane>
