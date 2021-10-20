@@ -26,7 +26,7 @@ public class Timeotion extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("app.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("timeotion.fxml"));
         stage.initStyle(StageStyle.TRANSPARENT);
         
         // Mouse press event listner to assist mouse dragging
