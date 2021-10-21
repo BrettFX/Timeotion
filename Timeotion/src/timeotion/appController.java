@@ -7,10 +7,8 @@ package timeotion;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -22,7 +20,7 @@ import javafx.scene.layout.AnchorPane;
 public class appController implements Initializable {
     
     @FXML
-    private ImageView btn_home, btn_settings, btn_profile, btn_share;
+    private ImageView btn_home, btn_settings, btn_profile, btn_exit;
     
     @FXML
     private AnchorPane home, settings, profile;
@@ -38,8 +36,12 @@ public class appController implements Initializable {
      */
     private void setActiveTab(AnchorPane tab) {
         activeTab.setVisible(false);
-        activeTab = tab;
-        activeTab.setVisible(true);
+            
+        // Only want to set active tab to actual value (corner case)
+        if (tab != null) {
+            activeTab = tab;
+            activeTab.setVisible(true);
+        }
     }
     
     @FXML
@@ -50,9 +52,8 @@ public class appController implements Initializable {
             setActiveTab(settings);
         } else if (event.getTarget().equals(btn_profile)) {
             setActiveTab(profile);
-        } else if (event.getTarget().equals(btn_share)) {
-            // TODO create share page for share tab
-            
+        } else if (event.getTarget().equals(btn_exit)) {
+            setActiveTab(null); // Setting null hides all tabs
         }
     }
     

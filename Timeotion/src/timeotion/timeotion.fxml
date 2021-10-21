@@ -30,9 +30,9 @@
                   <Image url="@images/profile.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="btn_share" layoutX="305.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btn_exit" fitHeight="32.0" fitWidth="39.0" layoutX="304.0" layoutY="15.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/share.png" />
+                  <Image url="@images/shutdown.png" />
                </image>
             </ImageView>
          </children></AnchorPane>
@@ -100,7 +100,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="home" layoutY="70.0" onDragDetected="#handleButtonAction" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" visible="false">
+      <AnchorPane fx:id="home" layoutY="70.0" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" visible="false">
          <children>
             <Label layoutX="153.0" layoutY="139.0" text="WELCOME" textFill="WHITE">
                <font>
