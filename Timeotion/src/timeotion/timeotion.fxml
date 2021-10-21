@@ -15,30 +15,51 @@
    <children>
       <AnchorPane fx:id="topbar" prefHeight="60.0" prefWidth="380.0" style="-fx-background-color: #3D4956;">
          <children>
-            <ImageView layoutX="35.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btn_home" layoutX="35.0" layoutY="15.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/home.png" />
                </image>
             </ImageView>
-            <ImageView layoutX="125.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btn_settings" layoutX="125.0" layoutY="15.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/settings.png" />
                </image>
             </ImageView>
-            <ImageView layoutX="215.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btn_profile" layoutX="215.0" layoutY="15.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/profile.png" />
                </image>
             </ImageView>
-            <ImageView layoutX="305.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btn_share" layoutX="305.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/share.png" />
                </image>
             </ImageView>
          </children></AnchorPane>
-      <AnchorPane fx:id="user" layoutY="70.0" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" />
-      <AnchorPane fx:id="stats" layoutY="70.0" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" />
-      <AnchorPane fx:id="settings" layoutY="70.0" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;">
+      <AnchorPane fx:id="profile" layoutY="70.0" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" visible="false">
+         <children>
+            <ImageView layoutX="158.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/user.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="167.0" layoutY="150.0" text="Brett A" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="148.0" layoutY="174.0" text="Software Engineer" textFill="WHITE">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="7.0" fitWidth="7.0" layoutX="228.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/up.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <AnchorPane fx:id="settings" layoutY="70.0" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" visible="false">
          <children>
             <Label layoutX="35.0" layoutY="38.0" text="TOUCH ENABLED" textFill="WHITE">
                <font>
@@ -72,25 +93,25 @@
             <JFXCheckBox checkedColor="#eda678" layoutX="32.0" layoutY="295.0" text="Auto Brightness" textFill="WHITE" />
             <JFXButton layoutX="35.0" layoutY="345.0" prefHeight="27.0" prefWidth="132.0" style="-fx-background-color: #515D6D; -fx-border-radius: 5em; -fx-background-radius: 5em;" text="Cancel" textFill="WHITE" />
             <JFXButton layoutX="215.0" layoutY="345.0" prefHeight="27.0" prefWidth="132.0" style="-fx-background-color: #eda678; -fx-border-radius: 5em; -fx-background-radius: 5em;" text="Save" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="awards" layoutY="70.0" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;">
-         <children>
-            <ImageView layoutX="158.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="7.0" fitWidth="7.0" layoutX="138.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/user.png" />
+                  <Image url="@images/up.png" />
                </image>
             </ImageView>
-            <Label layoutX="173.0" layoutY="153.0" text="Brett A" textFill="WHITE">
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="home" layoutY="70.0" onDragDetected="#handleButtonAction" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" visible="false">
+         <children>
+            <Label layoutX="153.0" layoutY="139.0" text="WELCOME" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="Arial Bold Italic" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="152.0" layoutY="176.0" text="Software Engineer" textFill="WHITE">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Label>
+            <ImageView fitHeight="7.0" fitWidth="7.0" layoutX="47.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/up.png" />
+               </image>
+            </ImageView>
          </children></AnchorPane>
    </children>
 </AnchorPane>
