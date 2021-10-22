@@ -5,10 +5,17 @@
  */
 package timeotion;
 
+import java.io.InputStream;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -26,7 +33,8 @@ public class appController implements Initializable {
     private AnchorPane home, settings, profile;
     
     // Track currently active tabs
-    private AnchorPane activeTab;
+    private AnchorPane activePane;
+    private ImageView activeTab;
     
     /**
      * Set the active tab. Toggles visibility of previous active tab and turns
@@ -35,12 +43,16 @@ public class appController implements Initializable {
      * @param tab The tab to set as active
      */
     private void setActiveTab(AnchorPane tab) {
-        activeTab.setVisible(false);
+        // Set tab active
+        activeTab.setImage(new Image(getClass().getResourceAsStream("images/home.png")));
+        
+        
+        activePane.setVisible(false);
             
         // Only want to set active tab to actual value (corner case)
         if (tab != null) {
-            activeTab = tab;
-            activeTab.setVisible(true);
+            activePane = tab;
+            activePane.setVisible(true);
         }
     }
     
@@ -53,7 +65,16 @@ public class appController implements Initializable {
         } else if (event.getTarget().equals(btn_profile)) {
             setActiveTab(profile);
         } else if (event.getTarget().equals(btn_exit)) {
-            setActiveTab(null); // Setting null hides all tabs
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Exit");
+            alert.setHeaderText("Close Program");
+            alert.setContentText("Are you sure you would like to exit and close program?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                Platform.exit();
+                System.exit(0);
+            }
         }
     }
     
@@ -61,7 +82,8 @@ public class appController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // Active tab should be home by default
         // NOTE: Must set here to prevent null pointers (NPE)
-        activeTab = home;
+        activePane = home;
+        activeTab = btn_home;
     }
     
 }
