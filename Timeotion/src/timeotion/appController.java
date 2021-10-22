@@ -5,7 +5,7 @@
  */
 package timeotion;
 
-import java.io.InputStream;
+import customjavafxlibs.libs.ImageButton;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -15,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -27,14 +26,17 @@ import javafx.scene.layout.AnchorPane;
 public class appController implements Initializable {
     
     @FXML
-    private ImageView btn_home, btn_settings, btn_profile, btn_exit;
+    private ImageButton btn_home, btn_settings, btn_profile;
+    
+    @FXML
+    private ImageView btn_exit;
     
     @FXML
     private AnchorPane home, settings, profile;
     
     // Track currently active tabs
     private AnchorPane activePane;
-    private ImageView activeTab;
+    private ImageButton activeTab;
     
     /**
      * Set the active tab. Toggles visibility of previous active tab and turns
@@ -42,28 +44,35 @@ public class appController implements Initializable {
      * 
      * @param tab The tab to set as active
      */
-    private void setActiveTab(AnchorPane tab) {
+    private void setActiveTab(AnchorPane tab, ImageButton btn) {
         // Set tab active
-        activeTab.setImage(new Image(getClass().getResourceAsStream("images/home.png")));
-        
-        
+//        activeTab.setImage(new Image(getClass().getResourceAsStream("images/home.png")));
+        activeTab.setActive(false);
         activePane.setVisible(false);
             
         // Only want to set active tab to actual value (corner case)
-        if (tab != null) {
+        if (tab != null && btn != null) {
+            activeTab = btn;
+            activeTab.setActive(true);
+            
             activePane = tab;
             activePane.setVisible(true);
+        } else {
+            System.out.println("Null values:");
+            System.out.println("|-- tab = " + tab);
+            System.out.println("|-- btn = " + btn);
         }
     }
     
     @FXML
-    private void handleButtonAction(MouseEvent event) {
+    public void handleButtonAction(MouseEvent event) {
+        System.out.println("Handling mouse event for " + event.getTarget());
         if (event.getTarget().equals(btn_home)) {
-            setActiveTab(home);
+            setActiveTab(home, btn_home);
         } else if (event.getTarget().equals(btn_settings)) {
-            setActiveTab(settings);
+            setActiveTab(settings, btn_settings);
         } else if (event.getTarget().equals(btn_profile)) {
-            setActiveTab(profile);
+            setActiveTab(profile, btn_profile);
         } else if (event.getTarget().equals(btn_exit)) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Exit");
@@ -84,6 +93,8 @@ public class appController implements Initializable {
         // NOTE: Must set here to prevent null pointers (NPE)
         activePane = home;
         activeTab = btn_home;
+        
+        setActiveTab(home, btn_home);
     }
     
 }

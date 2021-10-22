@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXToggleButton?>
+<?import customjavafxlibs.libs.ImageButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
@@ -15,21 +16,39 @@
    <children>
       <AnchorPane fx:id="topbar" prefHeight="60.0" prefWidth="380.0" style="-fx-background-color: #3D4956;">
          <children>
-            <ImageView fx:id="btn_home" layoutX="35.0" layoutY="15.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
+            <ImageButton fx:id="btn_home" layoutX="35.0" layoutY="15.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/home_active.png" />
+                  <Image url="@images/home.png" />
                </image>
-            </ImageView>
-            <ImageView fx:id="btn_settings" layoutX="125.0" layoutY="15.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
+               <activeImage>
+                  <Image url="@images/home_active.png" />
+               </activeImage>
+               <baseImage>
+                  <Image url="@images/home.png" />
+               </baseImage>
+            </ImageButton>
+            <ImageButton fx:id="btn_settings" layoutX="125.0" layoutY="15.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/settings.png" />
                </image>
-            </ImageView>
-            <ImageView fx:id="btn_profile" layoutX="215.0" layoutY="15.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
+               <activeImage>
+                  <Image url="@images/settings_active.png" />
+               </activeImage>
+               <baseImage>
+                  <Image url="@images/settings.png" />
+               </baseImage>
+            </ImageButton>
+            <ImageButton fx:id="btn_profile" layoutX="215.0" layoutY="15.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/profile.png" />
                </image>
-            </ImageView>
+               <activeImage>
+                  <Image url="@images/profile_active.png" />
+               </activeImage>
+               <baseImage>
+                  <Image url="@images/profile.png" />
+               </baseImage>
+            </ImageButton>
             <ImageView fx:id="btn_exit" fitHeight="32.0" fitWidth="39.0" layoutX="304.0" layoutY="15.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/shutdown.png" />
