@@ -46,7 +46,6 @@ public class appController implements Initializable {
      */
     private void setActiveTab(AnchorPane tab, ImageButton btn) {
         // Set tab active
-//        activeTab.setImage(new Image(getClass().getResourceAsStream("images/home.png")));
         activeTab.setActive(false);
         activePane.setVisible(false);
             
@@ -57,16 +56,11 @@ public class appController implements Initializable {
             
             activePane = tab;
             activePane.setVisible(true);
-        } else {
-            System.out.println("Null values:");
-            System.out.println("|-- tab = " + tab);
-            System.out.println("|-- btn = " + btn);
-        }
+        } 
     }
     
     @FXML
     public void handleButtonAction(MouseEvent event) {
-        System.out.println("Handling mouse event for " + event.getTarget());
         if (event.getTarget().equals(btn_home)) {
             setActiveTab(home, btn_home);
         } else if (event.getTarget().equals(btn_settings)) {
