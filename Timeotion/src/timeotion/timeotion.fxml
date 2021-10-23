@@ -7,6 +7,7 @@
 <?import customjavafxlibs.libs.ImageButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -49,13 +50,31 @@
                   <Image url="@images/profile.png" />
                </baseImage>
             </ImageButton>
-            <ImageView fx:id="btn_exit" fitHeight="32.0" fitWidth="39.0" layoutX="304.0" layoutY="15.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
+            <ImageButton fx:id="btn_share" layoutX="304.0" layoutY="15.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/shutdown.png" />
+                  <Image url="@images/share.png" />
                </image>
-            </ImageView>
-         </children></AnchorPane>
-      <AnchorPane fx:id="profile" layoutY="70.0" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" visible="false">
+               <activeImage>
+                  <Image url="@images/share_active.png" />
+               </activeImage>
+               <baseImage>
+                  <Image url="@images/share.png" />
+               </baseImage>
+            </ImageButton>
+         </children>
+         <effect>
+            <Glow level="0.8" />
+         </effect></AnchorPane>
+      <AnchorPane fx:id="share" layoutY="60.0" prefHeight="405.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" visible="false">
+         <children>
+            <Label layoutX="165.0" layoutY="138.0" text="SHARE" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold Italic" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="profile" layoutY="60.0" prefHeight="405.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" visible="false">
          <children>
             <ImageView layoutX="158.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -72,13 +91,8 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <ImageView fitHeight="7.0" fitWidth="7.0" layoutX="228.0" layoutY="-6.5" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/up.png" />
-               </image>
-            </ImageView>
          </children></AnchorPane>
-      <AnchorPane fx:id="settings" layoutY="70.0" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" visible="false">
+      <AnchorPane fx:id="settings" layoutY="60.0" prefHeight="405.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" visible="false">
          <children>
             <Label layoutX="35.0" layoutY="38.0" text="TOUCH ENABLED" textFill="WHITE">
                <font>
@@ -112,25 +126,15 @@
             <JFXCheckBox checkedColor="#eda678" layoutX="32.0" layoutY="295.0" text="Auto Brightness" textFill="WHITE" />
             <JFXButton layoutX="35.0" layoutY="345.0" prefHeight="27.0" prefWidth="132.0" style="-fx-background-color: #515D6D; -fx-border-radius: 5em; -fx-background-radius: 5em;" text="Cancel" textFill="WHITE" />
             <JFXButton layoutX="215.0" layoutY="345.0" prefHeight="27.0" prefWidth="132.0" style="-fx-background-color: #eda678; -fx-border-radius: 5em; -fx-background-radius: 5em;" text="Save" />
-            <ImageView fitHeight="7.0" fitWidth="7.0" layoutX="138.0" layoutY="-6.5" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/up.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="home" layoutY="70.0" prefHeight="395.0" prefWidth="380.0" style="-fx-background-color: #3D4956;">
+      <AnchorPane fx:id="home" layoutY="60.0" prefHeight="405.0" prefWidth="380.0" style="-fx-background-color: #3D4956;">
          <children>
             <Label layoutX="153.0" layoutY="139.0" text="WELCOME" textFill="WHITE">
                <font>
                   <Font name="Arial Bold Italic" size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="7.0" fitWidth="7.0" layoutX="47.0" layoutY="-6.5" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/up.png" />
-               </image>
-            </ImageView>
          </children></AnchorPane>
    </children>
 </AnchorPane>

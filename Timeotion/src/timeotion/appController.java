@@ -7,15 +7,9 @@ package timeotion;
 
 import customjavafxlibs.libs.ImageButton;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -26,13 +20,10 @@ import javafx.scene.layout.AnchorPane;
 public class appController implements Initializable {
     
     @FXML
-    private ImageButton btn_home, btn_settings, btn_profile;
+    private ImageButton btn_home, btn_settings, btn_profile, btn_share;
     
     @FXML
-    private ImageView btn_exit;
-    
-    @FXML
-    private AnchorPane home, settings, profile;
+    private AnchorPane home, settings, profile, share;
     
     // Track currently active tabs
     private AnchorPane activePane;
@@ -67,17 +58,18 @@ public class appController implements Initializable {
             setActiveTab(settings, btn_settings);
         } else if (event.getTarget().equals(btn_profile)) {
             setActiveTab(profile, btn_profile);
-        } else if (event.getTarget().equals(btn_exit)) {
-            Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("Exit");
-            alert.setHeaderText("Close Program");
-            alert.setContentText("Are you sure you would like to exit and close program?");
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK){
-                Platform.exit();
-                System.exit(0);
-            }
+        } else if (event.getTarget().equals(btn_share)) {
+//            Alert alert = new Alert(AlertType.CONFIRMATION);
+//            alert.setTitle("Exit");
+//            alert.setHeaderText("Close Program");
+//            alert.setContentText("Are you sure you would like to exit and close program?");
+//
+//            Optional<ButtonType> result = alert.showAndWait();
+//            if (result.get() == ButtonType.OK){
+//                Platform.exit();
+//                System.exit(0);
+//            }
+              setActiveTab(share, btn_share);
         }
     }
     
