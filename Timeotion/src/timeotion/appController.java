@@ -5,11 +5,15 @@
  */
 package timeotion;
 
+import com.jfoenix.controls.JFXListView;
 import customjavafxlibs.libs.ImageButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -25,9 +29,14 @@ public class appController implements Initializable {
     @FXML
     private AnchorPane home, settings, profile, share;
     
+    @FXML
+    private JFXListView timersListView;
+    
     // Track currently active tabs
     private AnchorPane activePane;
     private ImageButton activeTab;
+    
+    private String currentFood;
     
     /**
      * Set the active tab. Toggles visibility of previous active tab and turns
@@ -81,6 +90,23 @@ public class appController implements Initializable {
         activeTab = btn_home;
         
         setActiveTab(home, btn_home);
+        
+        // Initialize timers list view 
+        // TODO remove debug/testing code
+        for (int i = 0; i < 50; i++) {
+            timersListView.getItems().add(new Label("Item " + (i+1)));
+        }
+        
+        timersListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Label>() {
+
+                @Override
+                public void changed(ObservableValue<? extends Label> list, Label previous, Label current) {
+                    System.out.println("Changed!");
+                    System.out.println("|-- Previous = " + previous);
+                    System.out.println("|-- Current  = " + current);
+                }	
+        });
+        
     }
     
 }

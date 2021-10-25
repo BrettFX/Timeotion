@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import customjavafxlibs.libs.ImageButton?>
@@ -130,11 +131,7 @@
       </AnchorPane>
       <AnchorPane fx:id="home" layoutY="60.0" prefHeight="405.0" prefWidth="380.0" style="-fx-background-color: #3D4956;">
          <children>
-            <Label layoutX="153.0" layoutY="139.0" text="WELCOME" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold Italic" size="14.0" />
-               </font>
-            </Label>
+            <JFXListView fx:id="timersListView" prefHeight="345.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" />
          </children></AnchorPane>
    </children>
 </AnchorPane>
