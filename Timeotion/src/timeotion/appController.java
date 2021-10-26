@@ -5,6 +5,7 @@
  */
 package timeotion;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import customjavafxlibs.libs.ImageButton;
 import java.net.URL;
@@ -26,6 +27,9 @@ import javafx.scene.layout.AnchorPane;
 public class appController implements Initializable {
     
     @FXML
+    private JFXButton btnAddTimer;
+    
+    @FXML
     private ImageButton btn_home, btn_settings, btn_profile, btn_share;
     
     @FXML
@@ -38,7 +42,7 @@ public class appController implements Initializable {
     private AnchorPane activePane;
     private ImageButton activeTab;
     
-    private String currentFood;
+    private int timerCount = 0;
     
     /**
      * Set the active tab. Toggles visibility of previous active tab and turns
@@ -113,6 +117,13 @@ public class appController implements Initializable {
         }
     }
     
+    @FXML
+    public void addTimer() {
+        timersListView.setVisible(true);
+        timersListView.getItems().add(new Label("Timer " + (timerCount + 1)));
+        timerCount++;
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Active tab should be home by default
@@ -124,9 +135,9 @@ public class appController implements Initializable {
         
         // Initialize timers list view 
         // TODO remove debug/testing code
-        for (int i = 0; i < 50; i++) {
-            timersListView.getItems().add(new Label("Item " + (i+1)));
-        }
+//        for (int i = 0; i < 50; i++) {
+//            timersListView.getItems().add(new Label("Item " + (i+1)));
+//        }
         
         timersListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Label>() {
 

@@ -131,8 +131,8 @@
       </AnchorPane>
       <AnchorPane fx:id="home" layoutY="60.0" prefHeight="405.0" prefWidth="380.0" style="-fx-background-color: #3D4956;">
          <children>
-            <JFXListView fx:id="timersListView" layoutY="56.0" prefHeight="350.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" visible="false" />
-            <JFXButton accessibleText="Add Timer" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="295.0" layoutY="15.0" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #00e600; -fx-background-radius: 5em; -fx-border-radius: 5em;" text="+" textFill="WHITE" wrapText="true">
+            <JFXListView fx:id="timersListView" layoutY="60.0" prefHeight="345.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" verticalGap="10.0" visible="false" />
+            <JFXButton fx:id="btnAddTimer" accessibleText="Add Timer" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="335.0" layoutY="15.0" onMouseClicked="#addTimer" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #00e600; -fx-background-radius: 5em; -fx-border-radius: 5em;" text="+" textFill="WHITE" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>
