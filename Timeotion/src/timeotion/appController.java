@@ -68,12 +68,13 @@ public class appController implements Initializable {
     @FXML
     public void handleMouseOver(MouseEvent event) {
         EventTarget target = event.getTarget();
-        boolean tabHovered = target.equals(btn_home) ||
-                             target.equals(btn_settings) ||
-                             target.equals(btn_profile) ||
-                             target.equals(btn_share);
         
-        if (tabHovered) {
+//        boolean tabHovered = target.equals(btn_home) ||
+//                             target.equals(btn_settings) ||
+//                             target.equals(btn_profile) ||
+//                             target.equals(btn_share);
+        
+        if (target instanceof ImageButton) {
             ImageButton tab = (ImageButton)target;
             SepiaTone tone = new SepiaTone(1.0);
             tab.setEffect(tone);
@@ -83,12 +84,12 @@ public class appController implements Initializable {
     @FXML
     public void handleMouseExit(MouseEvent event) {
         EventTarget target = event.getTarget();
-        boolean tabExited = target.equals(btn_home) ||
-                             target.equals(btn_settings) ||
-                             target.equals(btn_profile) ||
-                             target.equals(btn_share);
+//        boolean tabExited = target.equals(btn_home) ||
+//                             target.equals(btn_settings) ||
+//                             target.equals(btn_profile) ||
+//                             target.equals(btn_share);
         
-        if (tabExited) {
+        if (target instanceof ImageButton) {
             ImageButton tab = (ImageButton)target;
             tab.setEffect(null); // Set to null to disable effect
         }
