@@ -30,6 +30,7 @@ public class Timeotion extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("timeotion.fxml"));
         
+        stage.setTitle("Timeotion - Timesheet Tracker");
         stage.setResizable(false);
         stage.centerOnScreen();
         
