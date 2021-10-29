@@ -27,10 +27,18 @@ import javafx.scene.layout.AnchorPane;
 public class appController implements Initializable {
     
     @FXML
-    private JFXButton btnAddTimer;
+    private Label lblTimer; // FOR DEMO PURPOSE ONLY
     
     @FXML
+    private JFXButton btnAddTimer;
+    
+    // Tabs
+    @FXML
     private ImageButton btn_home, btn_settings, btn_profile, btn_share;
+    
+    // Demo
+    @FXML
+    private ImageButton btn_play, btn_reset;
     
     @FXML
     private AnchorPane home, settings, profile, share;
@@ -115,6 +123,23 @@ public class appController implements Initializable {
 //                System.exit(0);
 //            }
               setActiveTab(share, btn_share);
+        }
+    }
+    
+    @FXML
+    public void configureTimerState(MouseEvent event) {
+        EventTarget target = event.getTarget();
+        if (target.equals(btn_play)) {
+            // Toggle active state
+            btn_play.setActive(!btn_play.isActive());
+            
+            // TODO implement functionality for playing/pausing timer
+            
+            
+        } else if (target.equals(btn_reset)) {
+            // TODO implement functionality for reseting timer
+            System.out.println("Reseting timer!");
+            
         }
     }
     
