@@ -7,6 +7,7 @@ package timeotion;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import customjavafxlibs.controls.FXTimer;
 import customjavafxlibs.controls.ImageButton;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,7 +17,10 @@ import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.SepiaTone;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -26,8 +30,11 @@ import javafx.scene.layout.AnchorPane;
  */
 public class appController implements Initializable {
     
+    @FXML 
+    private TextField timerName; // FOR DEMO PURPOSE ONLY
+    
     @FXML
-    private Label lblTimer; // FOR DEMO PURPOSE ONLY
+    private Label lblTimer;    // FOR DEMO PURPOSE ONLY
     
     @FXML
     private JFXButton btnAddTimer;
@@ -146,8 +153,18 @@ public class appController implements Initializable {
     @FXML
     public void addTimer() {
         timersListView.setVisible(true);
-        timersListView.getItems().add(new Label("Timer " + (timerCount + 1)));
+//        timersListView.getItems().add(new Label("Timer " + (timerCount + 1)));
+        timersListView.getItems().add(new FXTimer());
         timerCount++;
+    }
+    
+    @FXML
+    public void handleTimerNameKeyReleased(KeyEvent event) {
+        KeyCode code = event.getCode();
+        System.out.println("Pressed key with code: " + code);
+        if (code.equals(KeyCode.ENTER)) {
+            timerName.parentProperty().get().requestFocus();
+        }
     }
     
     @Override
@@ -165,16 +182,35 @@ public class appController implements Initializable {
 //            timersListView.getItems().add(new Label("Item " + (i+1)));
 //        }
         
-        timersListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Label>() {
+        timersListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<FXTimer>() {
 
                 @Override
-                public void changed(ObservableValue<? extends Label> list, Label previous, Label current) {
+                public void changed(ObservableValue<? extends FXTimer> list, FXTimer previous, FXTimer current) {
                     System.out.println("Changed!");
                     System.out.println("|-- Previous = " + previous);
                     System.out.println("|-- Current  = " + current);
                 }	
         });
         
+    }
+    
+    /**
+     * Produce a formatted timestamp string from seconds to HH:MM:SS.
+     * 
+     * EX: 72 seconds -> 00:01:12
+     * 
+     * @param baseSeconds The base number of seconds that will be used to create
+     *                    a formatted timestamp string. Seconds can be greater than 60.
+     * @return String the formatted timestamp string based on the provided seconds in HH:MM:SS
+     */
+    private String secondsToHms(double baseSeconds) {
+        int seconds =  (int)baseSeconds % 60;
+        int hours = (int)baseSeconds / 60;
+        int minutes = hours % 60;
+        hours /= 60;
+
+//      String.format("%02d:%02d:%04.1f", hours, minutes, seconds);      // 00:00:00.0
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds); // 00:00:00
     }
     
 }

@@ -59,6 +59,14 @@ public class Timeotion extends Application {
                     stage.setY(event.getScreenY() - yOffset);
                 }
             });
+        } else {
+            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    // Request focus to take focus away from child nodes within root
+                    root.requestFocus();
+                }
+            });
         }
         
         // Set the scene for the stage and show it
