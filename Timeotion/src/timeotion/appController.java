@@ -193,24 +193,4 @@ public class appController implements Initializable {
         });
         
     }
-    
-    /**
-     * Produce a formatted timestamp string from seconds to HH:MM:SS.
-     * 
-     * EX: 72 seconds -> 00:01:12
-     * 
-     * @param baseSeconds The base number of seconds that will be used to create
-     *                    a formatted timestamp string. Seconds can be greater than 60.
-     * @return String the formatted timestamp string based on the provided seconds in HH:MM:SS
-     */
-    private String secondsToHms(double baseSeconds) {
-        int seconds =  (int)baseSeconds % 60;
-        int hours = (int)baseSeconds / 60;
-        int minutes = hours % 60;
-        hours /= 60;
-
-//      String.format("%02d:%02d:%04.1f", hours, minutes, seconds);      // 00:00:00.0
-        return String.format("%02d:%02d:%02d", hours, minutes, seconds); // 00:00:00
-    }
-    
 }

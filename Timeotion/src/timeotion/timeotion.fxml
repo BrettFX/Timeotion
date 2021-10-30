@@ -161,10 +161,10 @@
                         <Image url="@images/reset.png" />
                      </image>
                      <activeImage>
-                        <Image url="@images/home_active.png" />
+                        <Image url="@images/reset.png" />
                      </activeImage>
                      <baseImage>
-                        <Image url="@images/home.png" />
+                        <Image url="@images/reset.png" />
                      </baseImage>
                   </ImageButton>
                   <TextField fx:id="timerName" layoutX="5.0" layoutY="5.0" onKeyReleased="#handleTimerNameKeyReleased" prefHeight="32.0" prefWidth="235.0" style="-fx-background-color: #ffffff00; -fx-text-fill: #ffffff;" text="New Timer 1">
