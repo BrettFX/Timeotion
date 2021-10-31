@@ -50,14 +50,14 @@ public class appController implements Initializable {
      * Set the active tab. Toggles visibility of previous active tab and turns
      * on the visibility of the new active tab.
      * 
-     * @param tab The tab to set as active
+     * @param tab The btn to set as active
      */
     private void setActiveTab(AnchorPane tab, ImageButton btn) {
-        // Set tab active
+        // Set btn active
         activeTab.setActive(false);
         activePane.setVisible(false);
             
-        // Only want to set active tab to actual value (corner case)
+        // Only want to set active btn to actual value (corner case)
         if (tab != null && btn != null) {
             activeTab = btn;
             activeTab.setActive(true);
@@ -71,9 +71,9 @@ public class appController implements Initializable {
     public void handleMouseOver(MouseEvent event) {
         EventTarget target = event.getTarget();
         if (target instanceof ImageButton) {
-            ImageButton tab = (ImageButton)target;
+            ImageButton btn = (ImageButton)target;
             SepiaTone tone = new SepiaTone(1.0);
-            tab.setEffect(tone);
+            btn.setEffect(tone);
         }
     }
     
@@ -81,8 +81,8 @@ public class appController implements Initializable {
     public void handleMouseExit(MouseEvent event) {
         EventTarget target = event.getTarget();
         if (target instanceof ImageButton) {
-            ImageButton tab = (ImageButton)target;
-            tab.setEffect(null); // Set to null to disable effect
+            ImageButton btn = (ImageButton)target;
+            btn.setEffect(null); // Set to null to disable effect
         }
     }
     
@@ -112,6 +112,12 @@ public class appController implements Initializable {
     @FXML
     public void addTimer() {
         timersListView.setVisible(true);
+        
+        // TODO add listner for playing timers to enforce business rule of only one timer
+        //      playing at a time.
+        
+        
+        // Implement deletion notifier listener for deleting individual timers
         timersListView.getItems().add(new FXTimer(new FXTimer.FXTimerDeletionNotifier() {
             @Override
             public void nofity(FXTimer fxt) {
@@ -155,7 +161,7 @@ public class appController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Active tab should be home by default
+        // Active btn should be home by default
         // NOTE: Must set here to prevent null pointers (NPE)
         activePane = home;
         activeTab = btn_home;
