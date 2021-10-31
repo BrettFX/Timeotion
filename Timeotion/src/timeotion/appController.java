@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import customjavafxlibs.controls.FXTimer;
 import customjavafxlibs.controls.ImageButton;
+import customjavafxlibs.utils.Toast;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
@@ -19,12 +20,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  *
  * @author brett
  */
 public class appController implements Initializable {
+    
+    @FXML
+    private AnchorPane mainPane;
     
     @FXML
     private JFXButton btnAddTimer;
@@ -44,6 +49,8 @@ public class appController implements Initializable {
     private ImageButton activeTab;
     
     private int timerCount = 0;
+    
+    private Stage primaryStage;
     
     /**
      * Set the active tab. Toggles visibility of previous active tab and turns
@@ -122,9 +129,45 @@ public class appController implements Initializable {
     @FXML
     public void addTimer() {
         timersListView.setVisible(true);
-//        timersListView.getItems().add(new Label("Timer " + (timerCount + 1)));
-        timersListView.getItems().add(new FXTimer());
+        timersListView.getItems().add(new FXTimer(new FXTimer.FXTimerDeletionNotifier() {
+            @Override
+            public void nofity(FXTimer fxt) {
+                final String timerName = fxt.getTimerName();
+                String toastMsg;
+                // Configure toast times (in milliseconds)
+                int toastMsgTime = 500;
+                int fadeInTime = 500;
+                int fadeOutTime= 500;
+                
+                // Delete timer (returns true if exists; otherwise false if not exists)
+                if (timersListView.getItems().remove(fxt)) {
+                    toastMsg = "Deleted timer \"" + timerName + "\"";
+                    if (primaryStage != null) {
+                        Toast.makeText(primaryStage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
+                    } else {
+                        System.out.println(toastMsg);
+                    }
+                } else {
+                    toastMsg = "Could not delete timer, \"" + timerName + "\"";
+                    if (primaryStage != null) {
+                        Toast.makeText(primaryStage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
+                    } else {
+                        System.out.println(toastMsg);
+                    }
+                }
+            }
+        }));
+        
         timerCount++;
+    }
+    
+    /**
+     * Set primary stage for this controller instance.
+     * 
+     * @param stage 
+     */
+    public void setStage(Stage stage) {
+        primaryStage = stage;
     }
     
     @Override
@@ -146,6 +189,5 @@ public class appController implements Initializable {
                     System.out.println("|-- Current  = " + current);
                 }	
         });
-        
     }
 }

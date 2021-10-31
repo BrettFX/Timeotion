@@ -30,11 +30,16 @@ public class Timeotion extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("timeotion.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("timeotion.fxml"));
+        Parent root = (Parent)loader.load();
         
         stage.setTitle("Timeotion - Timesheet Tracker");
         stage.setResizable(false);
         stage.centerOnScreen();
+        
+        // Pass primary stage to app controller for custom rendering (e.g., toast)
+        appController controller = (appController)loader.getController();
+        controller.setStage(stage);
         
         // Instantiate the scene and set the fill color to transparent
         Scene scene = new Scene(root);
