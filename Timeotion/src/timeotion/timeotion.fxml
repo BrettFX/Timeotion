@@ -132,12 +132,18 @@
       </AnchorPane>
       <AnchorPane fx:id="home" layoutY="60.0" prefHeight="405.0" prefWidth="380.0" style="-fx-background-color: #3D4956;">
          <children>
+            <ImageButton fx:id="btnAddTimer" layoutX="330.0" layoutY="15.0" onMouseClicked="#addTimer" onMouseEntered="#handleMouseOver" onMouseExited="#handleMouseExit" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/add.png" />
+               </image>
+               <activeImage>
+                  <Image url="@images/add.png" />
+               </activeImage>
+               <baseImage>
+                  <Image url="@images/add.png" />
+               </baseImage>
+            </ImageButton>
             <JFXListView fx:id="timersListView" editable="true" layoutY="60.0" prefHeight="345.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" verticalGap="10.0" visible="false" />
-            <JFXButton fx:id="btnAddTimer" accessibleText="Add Timer" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="335.0" layoutY="15.0" onMouseClicked="#addTimer" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #00e600; -fx-background-radius: 5em; -fx-border-radius: 5em;" text="+" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </JFXButton>
             <AnchorPane layoutX="15.0" layoutY="60.0" prefHeight="85.0" prefWidth="345.0" style="-fx-border-color: #E67E22; -fx-background-radius: 5em; -fx-border-radius: 1em;" visible="false">
                <children>
                   <Label fx:id="lblTimer" layoutX="15.0" layoutY="40.0" prefHeight="32.0" prefWidth="235.0" text="00:00:00" textFill="WHITE">

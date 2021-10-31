@@ -5,7 +5,6 @@
  */
 package timeotion;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import customjavafxlibs.controls.FXTimer;
 import customjavafxlibs.controls.ImageButton;
@@ -21,18 +20,13 @@ import javafx.scene.effect.SepiaTone;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import timeotion.utils.Settings;
 
 /**
  *
  * @author brett
  */
 public class appController implements Initializable {
-    
-    @FXML
-    private AnchorPane mainPane;
-    
-    @FXML
-    private JFXButton btnAddTimer;
     
     // Tabs
     @FXML
@@ -76,12 +70,6 @@ public class appController implements Initializable {
     @FXML
     public void handleMouseOver(MouseEvent event) {
         EventTarget target = event.getTarget();
-        
-//        boolean tabHovered = target.equals(btn_home) ||
-//                             target.equals(btn_settings) ||
-//                             target.equals(btn_profile) ||
-//                             target.equals(btn_share);
-        
         if (target instanceof ImageButton) {
             ImageButton tab = (ImageButton)target;
             SepiaTone tone = new SepiaTone(1.0);
@@ -92,11 +80,6 @@ public class appController implements Initializable {
     @FXML
     public void handleMouseExit(MouseEvent event) {
         EventTarget target = event.getTarget();
-//        boolean tabExited = target.equals(btn_home) ||
-//                             target.equals(btn_settings) ||
-//                             target.equals(btn_profile) ||
-//                             target.equals(btn_share);
-        
         if (target instanceof ImageButton) {
             ImageButton tab = (ImageButton)target;
             tab.setEffect(null); // Set to null to disable effect
@@ -142,14 +125,14 @@ public class appController implements Initializable {
                 // Delete timer (returns true if exists; otherwise false if not exists)
                 if (timersListView.getItems().remove(fxt)) {
                     toastMsg = "Deleted timer \"" + timerName + "\"";
-                    if (primaryStage != null) {
+                    if (primaryStage != null && Settings.isToastEnabled()) {
                         Toast.makeText(primaryStage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
                     } else {
                         System.out.println(toastMsg);
                     }
                 } else {
                     toastMsg = "Could not delete timer, \"" + timerName + "\"";
-                    if (primaryStage != null) {
+                    if (primaryStage != null  && Settings.isToastEnabled()) {
                         Toast.makeText(primaryStage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
                     } else {
                         System.out.println(toastMsg);
@@ -184,9 +167,13 @@ public class appController implements Initializable {
 
                 @Override
                 public void changed(ObservableValue<? extends FXTimer> list, FXTimer previous, FXTimer current) {
-                    System.out.println("Changed!");
-                    System.out.println("|-- Previous = " + previous);
-                    System.out.println("|-- Current  = " + current);
+//                    System.out.println("Changed!");
+//                    System.out.println("|-- Previous = " + previous);
+//                    System.out.println("|-- Current  = " + current);
+
+                    // TODO handle selection changed listener as needed
+                    
+                    
                 }	
         });
     }
