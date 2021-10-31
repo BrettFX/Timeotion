@@ -137,8 +137,6 @@ public class appController implements Initializable {
         setActiveTab(home, btn_home);
         
         // Initialize timers list view 
-        
-        
         timersListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<FXTimer>() {
 
                 @Override
