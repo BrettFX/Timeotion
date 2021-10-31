@@ -16,11 +16,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.effect.SepiaTone;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -30,22 +26,12 @@ import javafx.scene.layout.AnchorPane;
  */
 public class appController implements Initializable {
     
-    @FXML 
-    private TextField timerName; // FOR DEMO PURPOSE ONLY
-    
-    @FXML
-    private Label lblTimer;    // FOR DEMO PURPOSE ONLY
-    
     @FXML
     private JFXButton btnAddTimer;
     
     // Tabs
     @FXML
     private ImageButton btn_home, btn_settings, btn_profile, btn_share;
-    
-    // Demo
-    @FXML
-    private ImageButton btn_play, btn_reset;
     
     @FXML
     private AnchorPane home, settings, profile, share;
@@ -134,37 +120,11 @@ public class appController implements Initializable {
     }
     
     @FXML
-    public void configureTimerState(MouseEvent event) {
-        EventTarget target = event.getTarget();
-        if (target.equals(btn_play)) {
-            // Toggle active state
-            btn_play.setActive(!btn_play.isActive());
-            
-            // TODO implement functionality for playing/pausing timer
-            
-            
-        } else if (target.equals(btn_reset)) {
-            // TODO implement functionality for reseting timer
-            System.out.println("Reseting timer!");
-            
-        }
-    }
-    
-    @FXML
     public void addTimer() {
         timersListView.setVisible(true);
 //        timersListView.getItems().add(new Label("Timer " + (timerCount + 1)));
         timersListView.getItems().add(new FXTimer());
         timerCount++;
-    }
-    
-    @FXML
-    public void handleTimerNameKeyReleased(KeyEvent event) {
-        KeyCode code = event.getCode();
-        System.out.println("Pressed key with code: " + code);
-        if (code.equals(KeyCode.ENTER)) {
-            timerName.parentProperty().get().requestFocus();
-        }
     }
     
     @Override
@@ -177,10 +137,7 @@ public class appController implements Initializable {
         setActiveTab(home, btn_home);
         
         // Initialize timers list view 
-        // TODO remove debug/testing code
-//        for (int i = 0; i < 50; i++) {
-//            timersListView.getItems().add(new Label("Item " + (i+1)));
-//        }
+        
         
         timersListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<FXTimer>() {
 

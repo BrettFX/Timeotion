@@ -23,6 +23,8 @@ public class Timeotion extends Application {
     
     private final boolean TRANSPARENT_MODE = false;
     
+    private static final String USER_AGENT_STYLESHEET = Timeotion.class.getResource("timeotion.css").toExternalForm();
+    
     private double xOffset = 0;
     private double yOffset = 0;
     
@@ -36,6 +38,7 @@ public class Timeotion extends Application {
         
         // Instantiate the scene and set the fill color to transparent
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(USER_AGENT_STYLESHEET);
         
         if (TRANSPARENT_MODE) {
             stage.initStyle(StageStyle.TRANSPARENT);
