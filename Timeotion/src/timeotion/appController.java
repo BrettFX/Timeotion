@@ -44,6 +44,8 @@ public class appController implements Initializable {
     
     private int timerCount = 0;
     
+    private FXTimer activeTimer; // Keep track of currently active timer for efficient control
+    
     private Stage primaryStage;
     
     /**
@@ -117,10 +119,31 @@ public class appController implements Initializable {
         //      playing at a time.
         
         
-        // Implement deletion notifier listener for deleting individual timers
-        timersListView.getItems().add(new FXTimer(new FXTimer.FXTimerDeletionNotifier() {
+        // Implement event lister to enforce business rules on timers
+        timersListView.getItems().add(new FXTimer(new FXTimer.FXTimerEventListener() {
             @Override
-            public void nofity(FXTimer fxt) {
+            public void onPlay(FXTimer fxt) {
+                // Business rule: only one timer is allowed to play by default (may change this rule in the future)
+                if (activeTimer != null) {
+                    activeTimer.pause();
+                }
+                
+                activeTimer = fxt;
+                
+                // LESS EFFICIENT APPROACH: But might be needed for multi-timer playing support in the future
+                // Itereate list of timers and pause all that are currently playing
+//                ObservableList<FXTimer> timersList = timersListView.getItems();
+//                for (FXTimer timer : timersList) {
+//                    // Only set timer to paused if it's not the same as the timer that should be playing
+//                    if (!timer.equals(fxt) && timer.isPlaying()) {
+//                        timer.pause();
+//                        break;
+//                    }
+//                }
+            }
+            
+            @Override
+            public void onDelete(FXTimer fxt) {
                 final String timerName = fxt.getTimerName();
                 String toastMsg;
                 // Configure toast times (in milliseconds)
@@ -136,6 +159,8 @@ public class appController implements Initializable {
                     } else {
                         System.out.println(toastMsg);
                     }
+                    
+                    timerCount--;
                 } else {
                     toastMsg = "Could not delete timer, \"" + timerName + "\"";
                     if (primaryStage != null  && Settings.isToastEnabled()) {
