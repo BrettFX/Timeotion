@@ -16,6 +16,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -27,11 +28,15 @@ import timeotion.utils.Settings;
  * @author brett
  */
 public class appController implements Initializable {
+    // Buttons/Misc
+    @FXML 
+    private ImageButton btnAddTimer;
     
     // Tabs
     @FXML
     private ImageButton btn_home, btn_settings, btn_profile, btn_share;
     
+    // Pages
     @FXML
     private AnchorPane home, settings, profile, share;
     
@@ -192,6 +197,12 @@ public class appController implements Initializable {
         activeTab = btn_home;
         
         setActiveTab(home, btn_home);
+        
+        // Create tooltip for add button
+        Tooltip.install(btnAddTimer, new Tooltip("Add a new timer"));
+        
+        // TODO Add saved timers from prefs
+        
         
         // Initialize timers list view 
         timersListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<FXTimer>() {
