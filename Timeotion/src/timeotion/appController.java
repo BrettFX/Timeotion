@@ -16,6 +16,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.input.MouseEvent;
@@ -28,7 +29,10 @@ import timeotion.utils.Settings;
  * @author brett
  */
 public class appController implements Initializable {
-    // Buttons/Misc
+    // Misc
+    @FXML
+    private Label lblTotalTime;
+    
     @FXML 
     private ImageButton btnAddTimer;
     
@@ -48,6 +52,7 @@ public class appController implements Initializable {
     private ImageButton activeTab;
     
     private int timerCount = 0;
+    private double totalTimeSecs = 0;
     
     private FXTimer activeTimer; // Keep track of currently active timer for efficient control
     
@@ -118,7 +123,10 @@ public class appController implements Initializable {
     
     @FXML
     public void addTimer() {
-        timersListView.setVisible(true);
+        if (!timersListView.isVisible()) {
+            lblTotalTime.setVisible(true);
+            timersListView.setVisible(true);
+        }
         
         // TODO add listner for playing timers to enforce business rule of only one timer
         //      playing at a time.
@@ -146,10 +154,23 @@ public class appController implements Initializable {
 //                    }
 //                }
             }
+
+            @Override
+            public void onTick(FXTimer timer, double secsAdded) {
+                // Keep track of total number of seconds added over time across timers
+                updateTotalTime(secsAdded);
+            }
+
+            @Override
+            public void onReset(FXTimer timer, double secsBeforeReset) {
+                // Subtract the number of seconds before reset to normalize total aggregation
+                updateTotalTime(-1 * secsBeforeReset);
+            }
             
             @Override
             public void onDelete(FXTimer fxt) {
                 final String timerName = fxt.getTimerName();
+                double secsBeforeDelete = fxt.getCurrentTimeSecs();
                 String toastMsg;
                 // Configure toast times (in milliseconds)
                 int toastMsgTime = 500;
@@ -165,7 +186,14 @@ public class appController implements Initializable {
                         System.out.println(toastMsg);
                     }
                     
+                    // Keep track of total timers and time aggregation
                     timerCount--;
+                    updateTotalTime(-1 * secsBeforeDelete);
+                    
+                    if (timerCount == 0) {
+                        timersListView.setVisible(false);
+                        lblTotalTime.setVisible(false);
+                    }
                 } else {
                     toastMsg = "Could not delete timer, \"" + timerName + "\"";
                     if (primaryStage != null  && Settings.isToastEnabled()) {
@@ -178,6 +206,21 @@ public class appController implements Initializable {
         }));
         
         timerCount++;
+    }
+    
+    /**
+     * Update the total time aggregated across all existing timers. The value
+     * provided as a delta time in seconds and be positive or negative and 
+     * add or subtract from the current running total respectively.
+     * 
+     * @param deltaSeconds Positive or negative seconds to use to adjust the
+     *                     current total time aggregation.
+     */
+    private void updateTotalTime(double deltaSeconds) {
+        totalTimeSecs += deltaSeconds;
+        
+        // Update the total time label based on the new total time in seconds
+        lblTotalTime.setText(FXTimer.secondsToHms(totalTimeSecs));
     }
     
     /**
@@ -198,8 +241,9 @@ public class appController implements Initializable {
         
         setActiveTab(home, btn_home);
         
-        // Create tooltip for add button
+        // Create tooltips 
         Tooltip.install(btnAddTimer, new Tooltip("Add a new timer"));
+        Tooltip.install(lblTotalTime, new Tooltip("Total time across timers"));
         
         // TODO Add saved timers from prefs
         
@@ -218,5 +262,7 @@ public class appController implements Initializable {
                     
                 }	
         });
+        
+        
     }
 }

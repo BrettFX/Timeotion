@@ -132,6 +132,11 @@
       </AnchorPane>
       <AnchorPane fx:id="home" layoutY="60.0" prefHeight="405.0" prefWidth="380.0" style="-fx-background-color: #3D4956;">
          <children>
+            <Label fx:id="lblTotalTime" layoutX="14.0" layoutY="15.0" prefHeight="32.0" prefWidth="235.0" text="00:00:00" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Arial Black" size="22.0" />
+               </font>
+            </Label>
             <ImageButton fx:id="btnAddTimer" layoutX="330.0" layoutY="15.0" onMouseClicked="#addTimer" onMouseEntered="#handleMouseOver" onMouseExited="#handleMouseExit" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/add.png" />
