@@ -156,13 +156,13 @@ public class appController implements Initializable {
             }
 
             @Override
-            public void onTick(FXTimer timer, double secsAdded) {
+            public void onTick(FXTimer timer, int secsAdded) {
                 // Keep track of total number of seconds added over time across timers
                 updateTotalTime(secsAdded);
             }
 
             @Override
-            public void onReset(FXTimer timer, double secsBeforeReset) {
+            public void onReset(FXTimer timer, int secsBeforeReset) {
                 // Subtract the number of seconds before reset to normalize total aggregation
                 updateTotalTime(-1 * secsBeforeReset);
             }
@@ -170,7 +170,7 @@ public class appController implements Initializable {
             @Override
             public void onDelete(FXTimer fxt) {
                 final String timerName = fxt.getTimerName();
-                double secsBeforeDelete = fxt.getCurrentTimeSecs();
+                int secsBeforeDelete = fxt.getAccumulatedTimeSecs();
                 String toastMsg;
                 // Configure toast times (in milliseconds)
                 int toastMsgTime = 500;
@@ -216,7 +216,7 @@ public class appController implements Initializable {
      * @param deltaSeconds Positive or negative seconds to use to adjust the
      *                     current total time aggregation.
      */
-    private void updateTotalTime(double deltaSeconds) {
+    private void updateTotalTime(int deltaSeconds) {
         totalTimeSecs += deltaSeconds;
         
         // Update the total time label based on the new total time in seconds
