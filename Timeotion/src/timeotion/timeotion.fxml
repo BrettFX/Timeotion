@@ -52,7 +52,7 @@
                   <Image url="@images/profile.png" />
                </baseImage>
             </ImageButton>
-            <ImageButton fx:id="btn_share" layoutX="304.0" layoutY="15.0" onMouseClicked="#handleButtonAction" onMouseEntered="#handleMouseOver" onMouseExited="#handleMouseExit" pickOnBounds="true" preserveRatio="true">
+            <ImageButton fx:id="btn_share" layoutX="305.0" layoutY="15.0" onMouseClicked="#handleButtonAction" onMouseEntered="#handleMouseOver" onMouseExited="#handleMouseExit" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/share.png" />
                </image>
