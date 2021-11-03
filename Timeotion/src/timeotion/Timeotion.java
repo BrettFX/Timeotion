@@ -17,7 +17,7 @@ import javafx.stage.StageStyle;
 
 /**
  *
- * @author brett
+ * @author Brett Allen
  */
 public class Timeotion extends Application {
     

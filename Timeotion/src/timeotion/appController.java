@@ -12,6 +12,7 @@ import customjavafxlibs.controls.ImageButton;
 import customjavafxlibs.utils.Toast;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.Transition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -24,11 +25,12 @@ import javafx.scene.effect.SepiaTone;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import timeotion.animations.PulseTransition;
 import timeotion.utils.Settings;
 
 /**
  *
- * @author brett
+ * @author Brett Allen
  */
 public class appController implements Initializable {
     // Misc
@@ -37,9 +39,6 @@ public class appController implements Initializable {
     
     @FXML 
     private ImageButton btnAddTimer;
-    
-    @FXML
-    private JFXToggleButton tglAlwaysOnTop;
     
     // Tabs
     @FXML
@@ -60,6 +59,8 @@ public class appController implements Initializable {
     private double totalTimeSecs = 0;
     
     private FXTimer activeTimer; // Keep track of currently active timer for efficient control
+    
+    private PulseTransition pulseAnimation;
     
     private Stage primaryStage;
     
@@ -204,9 +205,12 @@ public class appController implements Initializable {
                     timerCount--;
                     updateTotalTime(-1 * secsBeforeDelete);
                     
+                    // If there are no more timers left then turn off visbility of widgets and play
+                    // pulse animation for the add timer button
                     if (timerCount == 0) {
                         timersListView.setVisible(false);
                         lblTotalTime.setVisible(false);
+                        pulseAnimation.play();
                     }
                 } else {
                     toastMsg = "Could not delete timer, \"" + timerName + "\"";
@@ -220,6 +224,7 @@ public class appController implements Initializable {
         }));
         
         timerCount++;
+        pulseAnimation.stop();
     }
     
     /**
@@ -258,6 +263,11 @@ public class appController implements Initializable {
         // Create tooltips 
         Tooltip.install(btnAddTimer, new Tooltip("Add a new timer"));
         Tooltip.install(lblTotalTime, new Tooltip("Total time across timers"));
+        
+        // Create, configure, and play animations
+        pulseAnimation = new PulseTransition(btnAddTimer);
+        pulseAnimation.setCycleCount(Transition.INDEFINITE);
+        pulseAnimation.play(); // TODO if saved timers exist then this should not be played on init
         
         // TODO Add saved timers from prefs
         
