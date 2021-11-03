@@ -6,6 +6,7 @@
 package timeotion;
 
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXToggleButton;
 import customjavafxlibs.controls.FXTimer;
 import customjavafxlibs.controls.ImageButton;
 import customjavafxlibs.utils.Toast;
@@ -13,6 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,6 +37,9 @@ public class appController implements Initializable {
     
     @FXML 
     private ImageButton btnAddTimer;
+    
+    @FXML
+    private JFXToggleButton tglAlwaysOnTop;
     
     // Tabs
     @FXML
@@ -118,6 +123,15 @@ public class appController implements Initializable {
 //                System.exit(0);
 //            }
               setActiveTab(share, btn_share);
+        }
+    }
+    
+    @FXML
+    public void toggleAlwaysOnTop(ActionEvent event) {
+        EventTarget target = event.getTarget();
+        if (target instanceof JFXToggleButton) {
+            boolean selected = ((JFXToggleButton)target).isSelected();
+            primaryStage.setAlwaysOnTop(selected);
         }
     }
     
