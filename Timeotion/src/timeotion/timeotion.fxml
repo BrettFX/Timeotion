@@ -149,7 +149,7 @@
                </baseImage>
             </ImageButton>
             <JFXListView fx:id="timersListView" editable="true" layoutY="60.0" prefHeight="345.0" prefWidth="380.0" style="-fx-background-color: #3D4956;" verticalGap="10.0" visible="false" />
-            <AnchorPane layoutX="15.0" layoutY="60.0" prefHeight="85.0" prefWidth="345.0" style="-fx-border-color: #E67E22; -fx-background-radius: 5em; -fx-border-radius: 1em;">
+            <AnchorPane layoutX="15.0" layoutY="60.0" prefHeight="110.0" prefWidth="345.0" style="-fx-border-color: #E67E22; -fx-background-radius: 5em; -fx-border-radius: 1em;" visible="false">
                <children>
                   <Label fx:id="lblTimer" layoutX="15.0" layoutY="40.0" prefHeight="32.0" prefWidth="195.0" text="00:00:00" textFill="WHITE">
                      <font>
@@ -194,6 +194,11 @@
                         <Image url="@images/delete.png" />
                      </baseImage>
                   </ImageButton>
+                  <Label fx:id="lblHours" layoutX="15.0" layoutY="70.0" prefHeight="32.0" prefWidth="195.0" text="0.0" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Black" size="22.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </children></AnchorPane>
