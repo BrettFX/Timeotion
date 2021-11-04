@@ -239,7 +239,9 @@ public class appController implements Initializable {
         totalTimeSecs += deltaSeconds;
         
         // Update the total time label based on the new total time in seconds
-        lblTotalTime.setText(FXTimer.secondsToHms(totalTimeSecs));
+        String totalHms = FXTimer.secondsToHms(totalTimeSecs);
+        String totalHours = FXTimer.secondsToHours(totalTimeSecs);
+        lblTotalTime.setText(totalHms + " | " + totalHours);
     }
     
     /**
@@ -262,7 +264,7 @@ public class appController implements Initializable {
         
         // Create tooltips 
         Tooltip.install(btnAddTimer, new Tooltip("Add a new timer"));
-        Tooltip.install(lblTotalTime, new Tooltip("Total time across timers"));
+        Tooltip.install(lblTotalTime, new Tooltip("Total time across timers in HH:MM:SS format | Total hours"));
         
         // Create, configure, and play animations
         pulseAnimation = new PulseTransition(btnAddTimer);
