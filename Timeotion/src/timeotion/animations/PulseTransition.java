@@ -24,6 +24,9 @@ import javafx.util.Duration;
  * @author Jasper Potts
  */
 public class PulseTransition extends CachedTimelineTransition {
+    private static final float MIN_SCALE = 0.8f;
+    private static final float MAX_SCALE = 1.0f;
+    
     /**
      * Create new PulseTransition
      * 
@@ -35,21 +38,21 @@ public class PulseTransition extends CachedTimelineTransition {
             TimelineBuilder.create()
                 .keyFrames(
                     new KeyFrame(Duration.millis(0), 
-                        new KeyValue(node.scaleXProperty(), 1, WEB_EASE),
-                        new KeyValue(node.scaleYProperty(), 1, WEB_EASE)
+                        new KeyValue(node.scaleXProperty(), MAX_SCALE, WEB_EASE),
+                        new KeyValue(node.scaleYProperty(), MAX_SCALE, WEB_EASE)
                     ),
                     new KeyFrame(Duration.millis(500), 
-                        new KeyValue(node.scaleXProperty(), 1.1, WEB_EASE),
-                        new KeyValue(node.scaleYProperty(), 1.1, WEB_EASE)
+                        new KeyValue(node.scaleXProperty(), MIN_SCALE, WEB_EASE),
+                        new KeyValue(node.scaleYProperty(), MIN_SCALE, WEB_EASE)
                     ),
                     new KeyFrame(Duration.millis(1000), 
-                        new KeyValue(node.scaleXProperty(), 1, WEB_EASE),
-                        new KeyValue(node.scaleYProperty(), 1, WEB_EASE)
+                        new KeyValue(node.scaleXProperty(), MAX_SCALE, WEB_EASE),
+                        new KeyValue(node.scaleYProperty(), MAX_SCALE, WEB_EASE)
                     )
                 )
                 .build()
             );
-        setCycleDuration(Duration.seconds(1));
+        setCycleDuration(Duration.seconds(2));
         setDelay(Duration.seconds(0.2));
     }
 }
