@@ -83,14 +83,14 @@
                   <Image url="@images/user.png" />
                </image>
             </ImageView>
-            <Label layoutX="167.0" layoutY="150.0" text="Brett A" textFill="WHITE">
+            <Label alignment="CENTER" layoutY="150.0" prefHeight="25.0" prefWidth="380.0" text="Brett A" textFill="WHITE">
                <font>
-                  <Font name="Arial Bold" size="14.0" />
+                  <Font name="Arial Black" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="148.0" layoutY="174.0" text="Software Engineer" textFill="WHITE">
+            <Label alignment="CENTER" layoutY="175.0" prefHeight="15.0" prefWidth="380.0" text="Software Engineer" textFill="WHITE">
                <font>
-                  <Font size="11.0" />
+                  <Font name="Arial" size="12.0" />
                </font>
             </Label>
          </children></AnchorPane>
