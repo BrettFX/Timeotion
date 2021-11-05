@@ -172,8 +172,11 @@ public class appController implements Initializable {
 
             @Override
             public void onTick(FXTimer timer, int secsAdded) {
-                // Keep track of total number of seconds added over time across timers
-                updateTotalTime(secsAdded);
+                // Only add time if this timer is set to be included in total time aggregation
+                if (timer.isIncludedInTotal()) {
+                    // Keep track of total number of seconds added over time across timers
+                    updateTotalTime(secsAdded);
+                }
             }
 
             @Override
@@ -197,8 +200,6 @@ public class appController implements Initializable {
                     toastMsg = "Deleted timer \"" + timerName + "\"";
                     if (primaryStage != null && Settings.isToastEnabled()) {
                         Toast.makeText(primaryStage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
-                    } else {
-                        System.out.println(toastMsg);
                     }
                     
                     // Keep track of total timers and time aggregation
@@ -220,6 +221,14 @@ public class appController implements Initializable {
                         System.out.println(toastMsg);
                     }
                 }
+            }
+
+            @Override
+            public void onIncludeInTotalChanged(boolean include, int currentSecs) {
+                // Control whether to include this timer in the total time aggregation
+                // Add time (back) to total if include; otherwise subtract from total
+                int sign = include ? 1 : -1;
+                updateTotalTime(sign * currentSecs);
             }
         }));
         
