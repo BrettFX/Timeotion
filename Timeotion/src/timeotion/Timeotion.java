@@ -39,7 +39,8 @@ public class Timeotion extends Application {
         stage.centerOnScreen();
         
         // Set app icon on the stage
-        stage.getIcons().add(new Image(Timeotion.class.getResource("/timeotion/images/timeotion.png").toExternalForm()));
+        // NOTE: Need to retrieve resource as stream to change icon on taskbar/dock
+        stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/timeotion/images/timeotion.png")));
         
         // Pass primary stage to app controller for custom rendering (e.g., toast)
         appController controller = (appController)loader.getController();
