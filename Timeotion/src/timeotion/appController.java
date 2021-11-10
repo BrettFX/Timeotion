@@ -25,6 +25,7 @@ import javafx.scene.effect.SepiaTone;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import timeotion.animations.PulseTransition;
 import timeotion.utils.Settings;
 
@@ -233,6 +234,7 @@ public class appController implements Initializable {
         }));
         
         timerCount++;
+        pulseAnimation.jumpTo(Duration.INDEFINITE); // Jump to beginning by passing negative duration
         pulseAnimation.stop();
     }
     
