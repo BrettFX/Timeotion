@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -36,6 +37,9 @@ public class Timeotion extends Application {
         stage.setTitle("Timeotion - Timesheet Tracker");
         stage.setResizable(false);
         stage.centerOnScreen();
+        
+        // Set app icon on the stage
+        stage.getIcons().add(new Image(Timeotion.class.getResource("/timeotion/images/timeotion.png").toExternalForm()));
         
         // Pass primary stage to app controller for custom rendering (e.g., toast)
         appController controller = (appController)loader.getController();
