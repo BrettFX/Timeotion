@@ -390,9 +390,6 @@ public class appController implements Initializable {
                     );
 
                     alert.showAndWait();
-                    if (alert.getResult().equals(ButtonType.OK)) {
-                       System.out.println("User clicked OK");
-                    }
                 }
             });
         }
