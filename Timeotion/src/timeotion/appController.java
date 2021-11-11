@@ -12,13 +12,21 @@ import customjavafxlibs.controls.ImageButton;
 import customjavafxlibs.utils.Toast;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.prefs.BackingStoreException;
 import javafx.animation.Transition;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.SepiaTone;
@@ -138,6 +146,58 @@ public class appController implements Initializable {
     }
     
     @FXML
+    public void clearPreferences() {
+        // Get confirmation from user before clearing preferences
+        Alert alert = new Alert(
+            AlertType.CONFIRMATION,
+            null,
+            ButtonType.YES,
+            ButtonType.CANCEL
+        );
+        
+        alert.setTitle("Reset Preferences?");
+        alert.setHeaderText("Are you sure you would like to reset preferences?");
+        alert.getDialogPane().setContentText("Resetting preferences will result in"
+            + " any configured dialog boxes to reappear automatically until configured"
+            + " otherwise.");
+
+        alert.showAndWait();
+
+        // Only proceed with timer reset if the user selected yes
+        Alert resultAlert;
+        if (alert.getResult().equals(ButtonType.YES)) {
+            try {
+                Settings.getInstance().getPrefs().clear();
+                resultAlert = new Alert(
+                    AlertType.INFORMATION,
+                    null,
+                    ButtonType.CLOSE
+                );
+                
+                resultAlert.setTitle("Preferences Cleared");
+                resultAlert.setHeaderText("Preferences have been successfully cleared.");
+                resultAlert.getDialogPane().setContentText("All dialog popups will now be displayed until"
+                    + " configured otherwise.");
+                
+            } catch (BackingStoreException ex) {
+                Logger.getLogger(appController.class.getName()).log(Level.SEVERE, null, ex);
+                resultAlert = new Alert(
+                    AlertType.ERROR,
+                    null,
+                    ButtonType.CLOSE
+                );
+                
+                resultAlert.setTitle("Error When Clearing Preferences");
+                resultAlert.setHeaderText("Could not clear Preferences because of a BackingStoreException.");
+                resultAlert.getDialogPane().setContentText("Please contact support"
+                    + " at 443-812-0896 for assistance with this error. We apologize for the inconvenience.");
+            }
+            
+            resultAlert.showAndWait();
+        }
+    }
+    
+    @FXML
     public void addTimer() {
         if (!timersListView.isVisible()) {
             lblTotalTime.setVisible(true);
@@ -199,7 +259,7 @@ public class appController implements Initializable {
                 // Delete timer (returns true if exists; otherwise false if not exists)
                 if (timersListView.getItems().remove(fxt)) {
                     toastMsg = "Deleted timer \"" + timerName + "\"";
-                    if (primaryStage != null && Settings.isToastEnabled()) {
+                    if (primaryStage != null && Settings.getInstance().isToastEnabled()) {
                         Toast.makeText(primaryStage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
                     }
                     
@@ -216,7 +276,7 @@ public class appController implements Initializable {
                     }
                 } else {
                     toastMsg = "Could not delete timer, \"" + timerName + "\"";
-                    if (primaryStage != null  && Settings.isToastEnabled()) {
+                    if (primaryStage != null  && Settings.getInstance().isToastEnabled()) {
                         Toast.makeText(primaryStage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
                     } else {
                         System.out.println(toastMsg);
@@ -288,18 +348,54 @@ public class appController implements Initializable {
         // Initialize timers list view 
         timersListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<FXTimer>() {
 
-                @Override
-                public void changed(ObservableValue<? extends FXTimer> list, FXTimer previous, FXTimer current) {
+            @Override
+            public void changed(ObservableValue<? extends FXTimer> list, FXTimer previous, FXTimer current) {
 //                    System.out.println("Changed!");
 //                    System.out.println("|-- Previous = " + previous);
 //                    System.out.println("|-- Current  = " + current);
 
-                    // TODO handle selection changed listener as needed
-                    
-                    
-                }	
+                // TODO handle selection changed listener as needed
+
+
+            }	
         });
         
+        boolean showStartupDialog = Settings.getInstance().getPrefs().getBoolean(Settings.STARTUP_DIALOG_PREF, true);
+        
+        // Only show startup dialog if the user hasn't configured for it not to show
+        if (showStartupDialog) {
+            // Run later so the stage renders before the dialog pops up
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    // Show dialog on startup to notify user of auto-save feature
+                    // Provide an option to not show again and safe in prefs
+                    Alert alert = Settings.createAlertWithOptOut(
+                        AlertType.INFORMATION, 
+                        "Welcome to Timeotion!", 
+                        null, 
+                        "This app uses an autosave feature that consistently tracks"
+                            + " each timer you create. If you close this app at any"
+                            + " point or if your computer crashes, nothing will be"
+                            + " lost. Be at ease and enjoy tracking your time, in motion,"
+                            + " efficiently.",
+                        "Do not show again", 
+                        new Consumer<Boolean>() {
+                            @Override
+                            public void accept(Boolean checked) {
+                                Settings.getInstance().getPrefs().putBoolean(Settings.STARTUP_DIALOG_PREF, !checked);
+                            }
+                        },
+                        ButtonType.OK
+                    );
+
+                    alert.showAndWait();
+                    if (alert.getResult().equals(ButtonType.OK)) {
+                       System.out.println("User clicked OK");
+                    }
+                }
+            });
+        }
         
     }
 }

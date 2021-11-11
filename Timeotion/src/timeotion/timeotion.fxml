@@ -126,8 +126,8 @@
             <JFXToggleButton layoutX="260.0" layoutY="105.0" text="On" textFill="#eda678" toggleColor="#eda678" toggleLineColor="#eba478e5" />
             <JFXSlider blockIncrement="1.0" layoutX="35.0" layoutY="255.0" prefHeight="16.0" prefWidth="315.0" />
             <JFXCheckBox checkedColor="#eda678" layoutX="32.0" layoutY="295.0" text="Auto Brightness" textFill="WHITE" />
-            <JFXButton layoutX="35.0" layoutY="345.0" prefHeight="27.0" prefWidth="132.0" style="-fx-background-color: #515D6D; -fx-border-radius: 5em; -fx-background-radius: 5em;" text="Cancel" textFill="WHITE" />
-            <JFXButton layoutX="215.0" layoutY="345.0" prefHeight="27.0" prefWidth="132.0" style="-fx-background-color: #eda678; -fx-border-radius: 5em; -fx-background-radius: 5em;" text="Save" />
+            <JFXButton fx:id="btnClearPrefs" layoutX="35.0" layoutY="345.0" onAction="#clearPreferences" prefHeight="27.0" prefWidth="132.0" style="-fx-background-color: #515D6D; -fx-border-radius: 5em; -fx-background-radius: 5em;" text="Clear Preferences" textFill="WHITE" />
+            <JFXButton fx:id="btnRestoreDefaults" layoutX="215.0" layoutY="345.0" prefHeight="27.0" prefWidth="132.0" style="-fx-background-color: #eda678; -fx-border-radius: 5em; -fx-background-radius: 5em;" text="Restore Defaults" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="home" layoutY="60.0" prefHeight="405.0" prefWidth="380.0" style="-fx-background-color: #3D4956;">
