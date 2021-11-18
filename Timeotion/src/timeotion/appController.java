@@ -243,13 +243,16 @@ public class appController implements Initializable {
             @Override
             public void onReset(FXTimer timer, int secsBeforeReset) {
                 // Subtract the number of seconds before reset to normalize total aggregation
-                updateTotalTime(-1 * secsBeforeReset);
+                // Only subtract from total if this timer is currently included in total time
+                if (timer.isIncludedInTotal()) {
+                    updateTotalTime(-1 * secsBeforeReset);
+                }
             }
             
             @Override
-            public void onDelete(FXTimer fxt) {
-                final String timerName = fxt.getTimerName();
-                int secsBeforeDelete = fxt.getAccumulatedTimeSecs();
+            public void onDelete(FXTimer timer) {
+                final String timerName = timer.getTimerName();
+                int secsBeforeDelete = timer.getAccumulatedTimeSecs();
                 String toastMsg;
                 // Configure toast times (in milliseconds)
                 int toastMsgTime = 500;
@@ -257,7 +260,7 @@ public class appController implements Initializable {
                 int fadeOutTime= 500;
                 
                 // Delete timer (returns true if exists; otherwise false if not exists)
-                if (timersListView.getItems().remove(fxt)) {
+                if (timersListView.getItems().remove(timer)) {
                     toastMsg = "Deleted timer \"" + timerName + "\"";
                     if (primaryStage != null && Settings.getInstance().isToastEnabled()) {
                         Toast.makeText(primaryStage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
@@ -265,7 +268,11 @@ public class appController implements Initializable {
                     
                     // Keep track of total timers and time aggregation
                     timerCount--;
-                    updateTotalTime(-1 * secsBeforeDelete);
+                    
+                    // Only subtract from total if this timer is currently included in total time
+                    if (timer.isIncludedInTotal()) {
+                        updateTotalTime(-1 * secsBeforeDelete);
+                    }
                     
                     // If there are no more timers left then turn off visbility of widgets and play
                     // pulse animation for the add timer button
