@@ -1,7 +1,3 @@
-/Timeotion/nbproject/private/
-/Timeotion/nbproject/*.xml
-/Timeotion/nbproject/*.xml~
-/Timeotion/nbproject/*.properties
 /Timeotion/build/
 Timeotion/dist/
 .DS_Store
